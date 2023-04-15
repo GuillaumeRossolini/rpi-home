@@ -58,7 +58,7 @@ Don't plug in or remove the memory card while the device is powered. If the syst
 
 Raspberry Pi Zero especially, is sensitive to stuff being plugged in our out while it is in operation, and it might reboot just on principle. Try to get your screen, keyboard and whatnot plugged (or not) before powering on the Zero.
 
-It's your choice whether you want to shut it down with an SSH command (`sudo shutdown now` then wait until the blinking light stops) or by unpluging the power cable, but either action needs to happen before changing the hardware configuration. The safest of the two is the SSH way.
+It's your choice whether you want to shut it down with an SSH command (`sudo shutdown now` then wait until the blinking light stops) or by unpluging the power cable, but either action needs to happen before changing the hardware configuration. The safest way is the SSH command followed by unplugging the cable.
 
 
 # Setting up a new Raspberry Pi (all except the Pico models)
