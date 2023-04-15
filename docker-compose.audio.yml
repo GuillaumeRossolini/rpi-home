@@ -1,0 +1,24 @@
+version: "3"
+
+# More info at https://hub.docker.com/r/mikebrady/shairport-sync and https://github.com/mikebrady/shairport-sync
+services:
+
+  audio1:
+    container_name: audio1
+    image: mikebrady/shairport-sync@sha256:22f1be72c5be65ed0bcbb204902571728ae66e37929ecc4f08189d8b4afa8a00
+    network_mode: host
+    restart: unless-stopped
+    devices:
+      - /dev/snd
+    entrypoint:
+      - /init
+      - /usr/local/bin/shairport-sync
+      - "--statistics"
+#    volumes:
+#      - /home/shairport-sync/volumes/etc-shairport-sync.conf:/etc/shairport-sync.conf
+
+#  tester1:
+#    container_name: tester1
+#    image: mikebrady/sps-alsa-explore@sha256:964d366e4edc69b71cd6f9cca63463bfc5d8e6d1e757664799be679f3961b540
+#    devices:
+#      - /dev/snd
