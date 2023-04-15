@@ -213,7 +213,7 @@ docker exec -it pihole1 /bin/bash -c "[ \$(cat /etc/pihole/pihole-FTL.conf | gre
 # ask pihole to update its blocked domains
 docker exec -it pihole1 pihole -g
 
-# keep watch on the pihole's statistics (Ctr+C to stop)
+# keep watch on the pihole's statistics (Ctrl+C to stop)
 docker exec -it pihole1 pihole -c
 
 # reset the entire pihole's config (to start over)
@@ -224,6 +224,13 @@ docker start pihole1
 
 
 # Troubleshooting
+
+## WSL & ping
+If you are using WSL, you may need to run the following command (on your computer, not in an SSH session) to be able to use `ping`, which may come in handy for troubleshooting later on:
+```sh
+sudo setcap cap_net_raw+p $(which ping)
+```
+_cf_. https://github.com/microsoft/WSL/issues/5109
 
 ## WiFi
 
