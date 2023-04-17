@@ -6,6 +6,8 @@ Or at least, if supply were still like in 2019, they'd be great. There are alter
 
 Anyway, if anyone is looking to set up their tiny computer for home automation, this repository might help.
 
+Complete video recordings are available at: https://youtube.com/playlist?list=PLW4t6juigJ6tPH3m6DsibJxMRQV5RwtHs
+
 
 # What I've been using
 
@@ -17,7 +19,7 @@ Tools I need on my desktop or laptop:
 
 The services I like to have at home are:
 - an ad blocker that isn't intrusive and also works for my guests, like the *Pi-Hole*;
-- an AirPlay receiver on my Hi-Fi speakers, like *Shairport-Sync*;
+- an AirPlay receiver on my Hi-Fi speakers, like *Shairport Sync*;
 
 
 # First time set up for your computer
@@ -61,7 +63,9 @@ Raspberry Pi Zero especially, is sensitive to stuff being plugged in our out whi
 It's your choice whether you want to shut it down with an SSH command (`sudo shutdown now` then wait until the blinking light stops) or by unpluging the power cable, but either action needs to happen before changing the hardware configuration. The safest way is the SSH command followed by unplugging the cable.
 
 
-# Setting up a new Raspberry Pi (all except the Pico models)
+# Flashing the microSD card for a Raspberry Pi (all except the Pico models)
+
+_Flashing_ is what we call the process of erasing a flash drive (in this case a microSD card) and installing a new operating system on it (in this case the Raspberry OS).
 
 _[Last verified with Raspberry Pi OS Lite (32-bit) released 2023-02-21 and (64-bit) released 2023-02-21]_
 
@@ -124,13 +128,21 @@ After a minute or two, log back into the Raspberry Pi, making sure to use the ne
 ssh pi@pihole-gr
 ```
 
-Let's apply any system updates. For context, `apt` here represents a kind of App Store where there are several "sources", at least one of them being managed by the maintainers of the Linux flavour you are using (called a "distribution"), and possibly other additional sources for third-party apps you may add. The `apt update` command downloads the listing of apps that are available from all these sources, and `apt upgrade` applies them. Then run `apt dist-upgrade` and `apt autoremove` just to be thourough, but a fresh install shouldn't need these last two commands.
+Let's apply any system updates. For context, `apt` here represents a kind of App Store where there are several "sources", at least one of them being managed by the maintainers of the Linux flavour you are using (called a "distribution"), and possibly other additional sources for third-party apps you may add. The `apt update` command downloads the listing of apps that are available from all these sources, and `apt upgrade` applies them. Reboot to make sure any new kernels and other critical updates are loaded.
 ```sh
 sudo apt update
 sudo apt upgrade
+sudo reboot now
+```
+
+You can also run `apt dist-upgrade` and `apt autoremove` just to be thourough, but a fresh install shouldn't need these last two commands.
+```sh
 sudo apt dist-upgrade
 sudo apt autoremove
+sudo reboot now
 ```
+
+NB: If you know your Linux well, you can probably skip a lot of these reboots. But I am being cautious for this demonstration, so, lots of reboots.
 
 I usually change the time server used to synchronize the clock
 ```sh
