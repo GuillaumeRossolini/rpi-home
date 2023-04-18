@@ -26,9 +26,34 @@ Usually, trying to start a Raspberry Pi with a garbled memory card shows nothing
 If I have updated my computer, restarted, tried again several times in a row and it still fails, then the memory card is probably broken. Sometimes I have another adapter, another USB port or something else I can try before I throwing out the memory card (or whatever component was causing the issue).
 
 
-## WiFi
+## Errors writing files on the system // broken MicroSD card
 
-If the WiFi isn't working, try to plug in a keyboard and screen, using "pi" as a username and "raspberry" as the password (or whatever you set up in the Imager settings), then locate the WiFi config like this:
+The type of memory cards used for Raspberry Pi boards is often very cheap and they break easily. They simply have a limited life span and they weren't built with robustness in mind, because they can be replaced cheaply. Sometimes they are even broken right out of the box. Other times you stored them somewhere and small tempretature or humidity changes broke them before you opened their box. Yet others work fine for a while, but then they fail at some point.
+
+I find that broken memory cards tend to fail in the `apt update` or `apt upgrade` stages. Here is an example I got today:
+```
+Reading package lists... Error!
+E: Encountered a section with no Package: header
+E: Problem with MergeList /var/lib/dpkg/status
+E: The package lists or status file could not be parsed or opened.
+```
+
+If you reboot the Raspberry Pi at that moment with a screen plugged in, you might observe a different boot sequence from the previous one, and this time it might say something about a "Kernel panic".
+
+It's time to throw away this memory card and to try a new one. There is no repairing it.
+
+Although, before you throw out your memory card, try flashing it again with a different adapter first, or a diferent computer.
+
+Flash card life span is a good reason why we try to avoid writing log files when the system is running. We don't want the MicroSD card to break too fast. It's going to fail eventually, but writing files makes it happen much faster.
+
+I've had PiHole running on the same MicroSD card for years now (I'm probably just lucky that the bad sectors are being avoided), but several cards have failed me out of the box in the last week. It seems unpredictable.
+
+
+## Wi-Fi
+
+When using the Raspbery Pi Imager, there are settings that automatically set up the Wifi for the Pi. This section shouldn't be needed if you used that.
+
+If the WiFi isn't working on the Pi, try to plug in a keyboard and screen, using "pi" as a username and "raspberry" as the password (or whatever you set up in the Imager settings), then locate the WiFi config like this:
 ```sh
 find /etc -name "wpa_supplicant.conf" -print 2>/dev/null
 ```
@@ -36,10 +61,6 @@ find /etc -name "wpa_supplicant.conf" -print 2>/dev/null
 
 Edit that file according to the WPA Supplicant documentation, which I won't repeat here.
 
-Also, edit this file if you need to add more SSH keys:
-```sh
-nano ~/.ssh/authorized_keys
-```
 
 ## SSH from your computer to the Pi
 
@@ -89,29 +110,10 @@ In most cases, a good way to find the issue is to run the following command. It'
 ssh -vvv pi@raspberry
 ```
 
-
-## Errors writing files on the system // broken MicroSD card
-
-The type of memory cards used for Raspberry Pi boards is often very cheap and they break easily. They simply have a limited life span and they weren't built with robustness in mind, because they can be replaced cheaply. Sometimes they are even broken right out of the box. Other times you stored them somewhere and small tempretature or humidity changes broke them before you opened their box. Yet others work fine for a while, but then they fail at some point.
-
-I find that broken memory cards tend to fail in the `apt update` or `apt upgrade` stages. Here is an example I got today:
+Also, edit this file on the Pi if you need to add more SSH keys than your own:
+```sh
+nano ~/.ssh/authorized_keys
 ```
-Reading package lists... Error!
-E: Encountered a section with no Package: header
-E: Problem with MergeList /var/lib/dpkg/status
-E: The package lists or status file could not be parsed or opened.
-```
-
-If you reboot the Raspberry Pi at that moment with a screen plugged in, you might observe a different boot sequence from the previous one, and this time it might say something about a "Kernel panic".
-
-It's time to throw away this memory card and to try a new one. There is no repairing it.
-
-Although, before you throw out your memory card, try flashing it again with a different adapter first, or a diferent computer.
-
-Flash card life span is a good reason why we try to avoid writing log files when the system is running. We don't want the MicroSD card to break too fast. It's going to fail eventually, but writing files makes it happen much faster.
-
-I've had PiHole running on the same MicroSD card for years now (I'm probably just lucky that the bad sectors are being avoided), but several cards have failed me out of the box in the last week. It seems unpredictable.
-
 
 
 ## Running some diagnostics
