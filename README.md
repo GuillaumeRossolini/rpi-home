@@ -244,6 +244,24 @@ sudo setcap cap_net_raw+p $(which ping)
 ```
 _cf_. https://github.com/microsoft/WSL/issues/5109
 
+
+## Flashing the microSD card
+
+The flashing process usually ends with a message that says something along the lines of "please remove the card", but that isn't always accurate. I found that the Imager sometimes doesn't "eject" the flash drive, and if I forget to do it myself in that case, then the memory card doesn't work and it needs to be flashed again.
+
+![Garbled file names in Windows Explorer](./images/microsd-ok.png)
+_Above: what the microSD card contents should look like after completion_
+
+![Intelligible file names in Windows Explorer](./images/microsd-ko.png)
+_Above: what the microSD card contents may look like when flashing didn't complete properly_
+
+My solution is to wait for a few seconds after the Imager finishes, then opening Windows Explorer. If the flash drive is still listed under My Computer, then I right click on it and select "Eject". Windows promptly informs me that I can safely remove the drive. At this point I still make an additional check by re-inserting the drive and inspecting its contents. If the contents look garbled, that's a sign that I should flash it again. Yes it was "verified", but still.
+
+Usually, trying to start a Raspberry Pi with a garbled memory card shows nothing. The lights don't blink and nothing shows up on screen.
+
+If I have updated my computer, restarted, tried again several times in a row and it still fails, then the memory card is probably broken. Sometimes I have another adapter, another USB port or something else I can try before I throwing out the memory card (or whatever component was causing the issue).
+
+
 ## WiFi
 
 If the WiFi isn't working, try to plug in a keyboard and screen, using "pi" as a username and "raspberry" as the password (or whatever you set up in the Imager settings), then locate the WiFi config like this:
