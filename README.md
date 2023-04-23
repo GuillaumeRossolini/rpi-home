@@ -109,7 +109,7 @@ Change the hostname in System settings
 sudo raspi-config
 ```
 
-^ To navigate this tool, use the TAB key to change fileds and the ENTER key to validate your choices.
+^ To navigate this tool, use the TAB key to change fields and the ENTER key to validate your choices.
 
 It's fine to keep the hostname as `raspberry`, unless you have several Raspberry Pi's on your network. Then you need a naming convention. I've been using something like "pihole-gr" or "rpiaudio-gr" with my initials because I tend to prepare others for family members as well.
 
