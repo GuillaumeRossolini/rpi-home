@@ -1,5 +1,7 @@
 # Collection of scripts to set up Raspbery Pi's for the home
 
+(NB: this was not tested with PiHole v6)
+
 Raspberry Pi's, and especially Raspberry Pi Zero's, are inexpensive computers that work well for some home automation and other experiments.
 
 Or at least, if supply were still like in 2019, they'd be great. There are alternatives of course, but I selfishly haven't tried any of them because I have a stash of pi's.
