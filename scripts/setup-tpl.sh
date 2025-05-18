@@ -26,17 +26,12 @@ timedatectl show-timesync | grep ServerName
 # ServerName=time.google.com
 
 # disable power management, which stops the Wifi sometimes
-sudo nano /etc/rc.local
+sudo nano /etc/rc.local # this isn't working on bookworm
 # add this line before the exit: (without the # at the start)
 #/sbin/iwconfig wlan0 power off
 
 # install some basic monitoring tools
-sudo apt install -y atop
-
-# disable this atop's background service (it stresses out the flash storage)
-sudo service atop stop
-sudo systemctl disable atop.service
-sudo find /var/log/atop -name "atop_*" -print -delete
+sudo apt install -y btop
 
 # if you need docker-compose
 sudo apt install -y docker.io docker-compose jq
